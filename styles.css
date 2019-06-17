@@ -1,5 +1,12 @@
 #generator{
   font-family: monospace;
+  margin: 0;
+  padding: 0;
+}
+
+html{
+  margin: 0;
+  padding: 0;
 }
 
 h2{
@@ -9,7 +16,20 @@ h2{
 }
 
 #input{
+  width: 50%;
+}
+
+#tutorial{
+  position: absolute;
   width: 30%;
+  left: 60%;
+  overflow: wrap;
+  margin: 10px;
+  margin-top: 0;
+  padding: 20px;
+  background-color: lightgrey;
+  border-style: solid transparent;
+  border-radius: 10px;
 }
 
 #newQuestion{
