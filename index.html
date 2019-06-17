@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <title>Quiz Module</title>
+  <title>Quiz Module Admin Screen</title>
   <link rel="stylesheet" href="styles.css" type="text/css">
   <script src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
   <script src="https://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
@@ -8,34 +8,41 @@
   <script src="script.js" type="text/javascript"></script>
 </head>
 <body>
-  <div id="newQuestion">
-    <h2>New Question</h2>
-    <label>Question text: </label><input type="text" id="newQuestionText"><button id="addQuestion">Add</button>
-  </div>
-  <div id="newResult">
-    <h2>New Result</h2>
-    <label>Result text: </label><input type="text" id="newResultText"><button id="addResult">Add</button>
-  </div>
-  <div id="newAnswer">
-    <h2>New Answer</h2>
-    <label>Answer text: </label><input type="text" id="newAnswerText">
-    <label>Answer to: </label><select name="question" id="displayPage"></select>
-    <label>Leads to: </label><select name="next" id="nextPage"></select>
-    <button id="addAnswer">Add</button>
-  </div>
-  <div id="delete">
-    <h2>Delete</h2>
-    <br>
-    <label>Questions</label>
-    <select name="questionToDelete" id="questions"></select>
-    <button id="deleteQuestion">Delete</button>
-    <br>
-    <label>Results</label>
-    <select name="resultToDelete" id="results"></select>
-    <button id="deleteResult">Delete</button>
-    <br>
-    <label>Answers</label>
-    <select name="answerToDelete" id="answers"></select>
-    <button id="deleteAnswer">Delete</button>
-  </div>
+  <section id="input">
+    <div id="newQuestion">
+      <h2>New Question</h2>
+      <label>Question text: </label><input type="text" id="newQuestionText">
+      <button id="addQuestion" class="btn">Add</button>
+    </div>
+    <div id="newResult">
+      <h2>New Result</h2>
+      <label>Result text: </label><input type="text" id="newResultText">
+      <button id="addResult" class="btn">Add</button>
+    </div>
+    <div id="newAnswer">
+      <h2>New Answer</h2>
+      <label>Answer text: </label><input type="text" id="newAnswerText">
+      <label>Answer to: </label><select name="question" id="displayPage"></select>
+      <label>Leads to: </label><select name="next" id="nextPage"></select>
+      <button id="addAnswer" class="btn">Add</button>
+    </div>
+    <div id="delete">
+      <h2>Delete</h2>
+      <label>Questions</label>
+      <select name="questionToDelete" id="questions"></select>
+      <button id="deleteQuestion" class="btn">Delete</button>
+      <br>
+      <label>Results</label>
+      <select name="resultToDelete" id="results"></select>
+      <button id="deleteResult" class="btn">Delete</button>
+      <br>
+      <label>Answers</label>
+      <select name="answerToDelete" id="answers"></select>
+      <button id="deleteAnswer" class="btn">Delete</button>
+    </div>
+    <div id="download">
+      <h2>Export</h2>
+      <a id="downloadButton" class="btn" download="quiz.json">Generate JSON</a>
+    </div>
+  </section>
 </body>

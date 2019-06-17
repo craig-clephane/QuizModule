@@ -50,6 +50,23 @@ function addAnswer(text, displayQuestion, linksTo){
   return answer.id;
 }
 
+function removeQuestion(questionID){
+  var linkedAnswers = questions[getQuestion(questionID)].answers;
+  for(var i = 0; i < linkedAnswers.length; i++){
+    removeAnswer(linkedAnswers[i]);
+  }
+
+}
+
+function removeAnswer(answerID){
+  for(var i = questions[getQuestion(answers[getAnswer(answerID)].displayQuestion)].answers.length-1; i <= 0; i--){
+    if(questions[getQuestion(answers[getAnswer(answerID)].displayQuestion)].answers[i] == answerID){
+      questions[getQuestion(answers[getAnswer(answerID)].displayQuestion)].answers.splice(i, 1);
+    }
+  }
+  answers.splice(answers.indexOf(answerID), 1);
+}
+
 function getQuestion(id){
   for(var i = 0; i < questions.length; i++){
     if(questions[i].id == id){
@@ -77,20 +94,48 @@ function getAnswer(id){
   return -1;
 }
 
+function updateSelections(){
+  $('#displayPage')[0].innerHTML = "";
+  $('#nextPage')[0].innerHTML = "";
+  $('#questions')[0].innerHTML = "";
+  $('#results')[0].innerHTML = "";
+  $('#answers')[0].innerHTML = "";
+  for(var i = 0; i < questions.length; i++){
+    $('#displayPage')[0].innerHTML += `<option value="${questions[i].id}">${questions[i].text}</option>`;
+    $('#nextPage')[0].innerHTML += `<option value="${questions[i].id}">${questions[i].text}</option>`;
+    $('#questions')[0].innerHTML += `<option value="${questions[i].id}">${questions[i].text}</option>`;
+  }
+  for(var i = 0; i < results.length; i++){
+    $('#nextPage')[0].innerHTML += `<option value="${results[i].id}">${results[i].text}</option>`;
+    $('#results')[0].innerHTML += `<option value="${results[i].id}">${results[i].text}</option>`;
+  }
+  for(var i = 0; i < answers.length; i++){
+    $('#answers')[0].innerHTML += `<option value="${answers[i].id}">${answers[i].text}</option>`;
+  }
+  console.log(questions);
+  console.log(results);
+  console.log(answers);
+}
+
+function exportToJson(){
+  var toOutput = [questions, results, answers];
+  var jsonOutput = JSON.stringify(toOutput);
+  var data = "text/json;charset=utf-8," + encodeURIComponent(jsonOutput);
+  $('#downloadButton').prop("href", `data:${data}`);
+  $('#downloadButton').innerHTML = "Regenerate JSON";
+}
+
 $(document).ready(function(){
   $('#addQuestion').click(function(){
     var text = $('#newQuestionText')[0].value;
     var questionID = addQuestion(text);
-    $('#displayPage')[0].innerHTML += `<option value="${questionID}">${text}</option>`;
-    $('#nextPage')[0].innerHTML += `<option value="${questionID}">${text}</option>`;
-    $('#questions')[0].innerHTML += `<option value="${questionID}">${text}</option>`;
+    updateSelections();
   });
 
   $('#addResult').click(function(){
     var text = $('#newResultText')[0].value;
     var resultID = addResult(text);
-    $('#nextPage')[0].innerHTML += `<option value="${resultID}">${text}</option>`;
-    $('#results')[0].innerHTML += `<option value="${resultID}">${text}</option>`;
+    updateSelections();
   });
 
   $('#addAnswer').click(function(){
@@ -98,6 +143,8 @@ $(document).ready(function(){
     var display = $('#displayPage')[0].value;
     var linksTo = $('#nextPage')[0].value;
     var answerID = addAnswer(text, display, linksTo);
-    $('#answers')[0].innerHTML += `<option value="${answerID}">${text}</option>`;
+    updateSelections();
   });
+
+  $('#downloadButton').click(exportToJson);
 });

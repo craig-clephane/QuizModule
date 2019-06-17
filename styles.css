@@ -8,9 +8,13 @@ h2{
   margin: 5px;
 }
 
+#input{
+  width: 30%;
+}
+
 #newQuestion{
   margin: 10px;
-  width: 30%;
+  width: 100%;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -19,9 +23,45 @@ h2{
   border-radius: 10px;
 }
 
+#download{
+  margin: 10px;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: lightgrey;
+  border-style: solid transparent;
+  border-radius: 10px;
+}
+.btn{
+  display: inline-block;
+  margin-bottom: 0;
+  padding: 0.6em 1em;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  color: #002147;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: #FFF;
+  background-image: none;
+  box-shadow: none;
+  text-shadow: none;
+  line-height: 1.42857;
+}
+
 #newResult{
   margin: 10px;
-  width: 30%;
+  width: 100%;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -32,8 +72,8 @@ h2{
 
 #newAnswer{
   margin: 10px;
+  width: 100%;
   padding: 20px;
-  width: 30%;
   display: flex;
   flex-direction: column;
   background-color: lightgrey;
@@ -43,7 +83,7 @@ h2{
 
 #delete{
   margin: 10px;
-  width: 30%;
+  width: 100%;
   padding: 20px;
   display: flex;
   flex-direction: column;
