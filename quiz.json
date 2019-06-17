@@ -1,0 +1,1 @@
+[[{"id":1,"text":"Are you sure?","answers":[]},{"id":2,"text":"Are you positive?","answers":[]}],[{"id":3,"text":"Continue"},{"id":4,"text":"Exit"}],[{"id":5,"text":"Yes","linksTo":"2","displayQuestion":"1"},{"id":6,"text":"No","linksTo":"4","displayQuestion":"1"},{"id":7,"text":"Yes","linksTo":"3","displayQuestion":"2"},{"id":8,"text":"No","linksTo":"4","displayQuestion":"2"}]]

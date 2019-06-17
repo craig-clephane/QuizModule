@@ -112,9 +112,6 @@ function updateSelections(){
   for(var i = 0; i < answers.length; i++){
     $('#answers')[0].innerHTML += `<option value="${answers[i].id}">${answers[i].text}</option>`;
   }
-  console.log(questions);
-  console.log(results);
-  console.log(answers);
 }
 
 function exportToJson(){
