@@ -10,9 +10,6 @@ function interpretQuiz(data){
   activeDisplayID = questions[0].id;
   results = data[1];
   answers = data[2];
-  console.log(questions);
-  console.log(results);
-  console.log(answers);
   updateDisplay();
 }
 
@@ -32,7 +29,6 @@ $(document).ready(function(){
 });
 
 function updateDisplay(){
-  console.log("update display");
   var activeQuestion = getQuestion(activeDisplayID);
   if(activeQuestion == -1){
     //display result
@@ -47,7 +43,6 @@ function updateDisplay(){
     answersArea.innerHTML = "";
     for(var i = 0; i < questions[activeQuestion].answers.length; i++){
       answersArea.innerHTML += `<button class="btn" id="${questions[activeQuestion].answers[i]}" onclick="showNext(event)">${answers[getAnswer(questions[activeQuestion].answers[i])].text}</button>`;
-      console.log("Added listener: " + questions[activeQuestion].answers[i]);
     }
   }
 }
