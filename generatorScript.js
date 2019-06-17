@@ -42,8 +42,8 @@ function addAnswer(text, displayQuestion, linksTo){
   var answer = new Answer;
   answer.text = text;
   answer.displayQuestion = displayQuestion;
-  if(getQuestion(displayQuestion.id) != -1){
-    questions[getQuestion(displayQuestion.id)].answers.push(answer.id);
+  if(getQuestion(displayQuestion) != -1){
+    questions[getQuestion(displayQuestion)].answers.push(answer.id);
   }
   answer.linksTo = linksTo;
   answers.push(answer);
