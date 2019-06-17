@@ -1,0 +1,86 @@
+var questions = [];
+var results = [];
+var answers = [];
+var questionArea;
+var answerArea;
+var activeDisplayID;
+
+function interpretQuiz(data){
+  questions = data[0];
+  activeDisplayID = questions[0].id;
+  results = data[1];
+  answers = data[2];
+  console.log(questions);
+  console.log(results);
+  console.log(answers);
+  updateDisplay();
+}
+
+function getQuiz(quizURL){
+  $.ajax({
+    url: quizURL,
+    type: 'GET',
+    dataType: "json",
+    success: interpretQuiz
+  });
+}
+
+$(document).ready(function(){
+  questionArea = $('#questionArea')[0];
+  answersArea = $('#answersArea')[0];
+  $.getJSON('https://dinkieshy.github.io/QuizModule/quiz.json', interpretQuiz);
+});
+
+function updateDisplay(){
+  console.log("update display");
+  var activeQuestion = getQuestion(activeDisplayID);
+  if(activeQuestion == -1){
+    //display result
+    $('#questionArea').addClass('hidden');
+    $('#answersArea').addClass('hidden');
+    $('#resultsArea').removeClass('hidden');
+    resultsArea.innerHTML = `<h3>${results[getResult(activeDisplayID)].text}</h3>`;
+  }
+  else{
+    //display question/answer
+    questionArea.innerHTML = `<h3>${questions[activeQuestion].text}</h3>`;
+    answersArea.innerHTML = "";
+    for(var i = 0; i < questions[activeQuestion].answers.length; i++){
+      answersArea.innerHTML += `<button class="btn" id="${questions[activeQuestion].answers[i]}" onclick="showNext(event)">${answers[getAnswer(questions[activeQuestion].answers[i])].text}</button>`;
+      console.log("Added listener: " + questions[activeQuestion].answers[i]);
+    }
+  }
+}
+
+function showNext(event){
+  var answer = answers[getAnswer(event.currentTarget.id)];
+  activeDisplayID = answer.linksTo;
+  updateDisplay();
+}
+
+function getQuestion(id){
+  for(var i = 0; i < questions.length; i++){
+    if(questions[i].id == id){
+      return i;
+    }
+  }
+  return -1;
+}
+
+function getResult(id){
+  for(var i = 0; i < results.length; i++){
+    if(results[i].id == id){
+      return i;
+    }
+  }
+  return -1;
+}
+
+function getAnswer(id){
+  for(var i = 0; i < answers.length; i++){
+    if(answers[i].id == id){
+      return i;
+    }
+  }
+  return -1;
+}

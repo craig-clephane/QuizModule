@@ -1,4 +1,4 @@
-body{
+#generator{
   font-family: monospace;
 }
 
@@ -90,4 +90,31 @@ h2{
   background-color: lightgrey;
   border-style: solid transparent;
   border-radius: 10px;
+}
+
+#questionArea{
+  width: 100%;
+  border-style: solid transparent;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 20px;
+  background-color: lightgrey;
+}
+
+#answersArea{
+  width: 100%;
+  border-style: solid transparent;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 20px;
+  background-color: lightgrey;
+}
+
+#resultsArea{
+  width: 100vw;
+  height: 100vh;
+}
+
+.hidden{
+  display: none;
 }
