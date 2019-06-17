@@ -9,8 +9,33 @@
 </head>
 <body>
   <div id="newQuestion">
-    <input type="text">
+    <h2>New Question</h2>
+    <label>Question text: </label><input type="text" id="newQuestionText"><button id="addQuestion">Add</button>
+  </div>
+  <div id="newResult">
+    <h2>New Result</h2>
+    <label>Result text: </label><input type="text" id="newResultText"><button id="addResult">Add</button>
   </div>
   <div id="newAnswer">
+    <h2>New Answer</h2>
+    <label>Answer text: </label><input type="text" id="newAnswerText">
+    <label>Answer to: </label><select name="question" id="displayPage"></select>
+    <label>Leads to: </label><select name="next" id="nextPage"></select>
+    <button id="addAnswer">Add</button>
+  </div>
+  <div id="delete">
+    <h2>Delete</h2>
+    <br>
+    <label>Questions</label>
+    <select name="questionToDelete" id="questions"></select>
+    <button id="deleteQuestion">Delete</button>
+    <br>
+    <label>Results</label>
+    <select name="resultToDelete" id="results"></select>
+    <button id="deleteResult">Delete</button>
+    <br>
+    <label>Answers</label>
+    <select name="answerToDelete" id="answers"></select>
+    <button id="deleteAnswer">Delete</button>
   </div>
 </body>
