@@ -124,7 +124,7 @@ function exportToJson(){
 
 $(document).ready(function(){
   $('#addQuestion').click(function(){
-    var text = $('#newQuestionText')[0].value;
+    var text = $('#newQuestionText')[0].value.trim();
     if(text != ""){
       $('#questionTextVal').addClass("hidden");
       $('#questionSuccess').removeClass("hidden");
@@ -144,7 +144,7 @@ $(document).ready(function(){
   });
 
   $('#addResult').click(function(){
-    var text = $('#newResultText')[0].value;
+    var text = $('#newResultText')[0].value.trim();
     if(text != ""){
       $('#resultTextVal').addClass("hidden");
       $('#resultSuccess').removeClass("hidden");
@@ -164,9 +164,9 @@ $(document).ready(function(){
   });
 
   $('#addAnswer').click(function(){
-    var text = $('#newAnswerText')[0].value;
-    var display = $('#displayPage')[0].value;
-    var linksTo = $('#nextPage')[0].value;
+    var text = $('#newAnswerText')[0].value.trim();
+    var display = $('#displayPage')[0].value.trim();
+    var linksTo = $('#nextPage')[0].value.trim();
     var validated = true;
     if(text == ""){
       $('#answerTextVal').removeClass("hidden");
