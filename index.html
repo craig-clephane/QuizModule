@@ -15,12 +15,13 @@
     <p>Once the questions and results have been created, you can start adding the answers. "answer to" relates to the question the answer relates to, and "leads to" refers to what will be shown if the answer is selected.</p>
     <p>When the questions, results and answers have all been added, hit "Generate JSON" at the bottom to receive your quiz file!</p>
   </section>
-  <section id="input">
+  <section id="inputSection">
     <div id="newQuestion">
       <label id="questionSuccess" class="success hidden">Question added!</label>
       <h2>New Question</h2>
       <label>Question text: </label><input type="text" id="newQuestionText">
       <label id="questionTextVal" class="warning hidden">Question text cannot be empty!</label>
+      <label>Question description: </label><input type="text" id="newQuestionDesc">
       <button id="addQuestion" class="btn">Add</button>
     </div>
     <div id="newResult">
@@ -28,6 +29,7 @@
       <h2>New Result</h2>
       <label>Result text: </label><input type="text" id="newResultText">
       <label id="resultTextVal" class="warning hidden">Result text cannot be empty!</label>
+      <label>Result description: </label><input type="text" id="newResultDesc">
       <button id="addResult" class="btn">Add</button>
     </div>
     <div id="newAnswer">
@@ -58,6 +60,7 @@
     <div id="download">
       <h2>Export</h2>
       <a id="downloadButton" class="btn" download="quiz.json">Generate JSON</a>
+      <label id="exportVal" class="warning hidden"></label>
     </div>
   </section>
 </body>

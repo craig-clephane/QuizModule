@@ -4,36 +4,40 @@ var results = [];
 var maxID = 0;
 
 function Question(){
-  this.id = maxID + 1;
+  this.id = maxID;
   maxID += 1;
   this.text = "";
+  this.description = "";
   this.answers = [];
 }
 
 function Result(){
-  this.id = maxID + 1;
+  this.id = maxID;
   maxID += 1;
   this.text = "";
+  this.description = "";
 }
 
 function Answer(){
-  this.id = maxID + 1;
+  this.id = maxID;
   maxID += 1;
   this.text = "";
   this.displayQuestion;
   this.linksTo = [];
 }
 
-function addQuestion(text){
+function addQuestion(text, description){
   var question = new Question;
   question.text = text;
+  question.description = description;
   questions.push(question);
   return question.id;
 }
 
-function addResult(text){
+function addResult(text, description){
   var result = new Result;
   result.text = text;
+  result.description = description;
   results.push(result);
   return result.id;
 }
@@ -55,7 +59,6 @@ function removeQuestion(questionID){
   for(var i = 0; i < linkedAnswers.length; i++){
     removeAnswer(linkedAnswers[i]);
   }
-
 }
 
 function removeAnswer(answerID){
@@ -125,16 +128,17 @@ function exportToJson(){
 $(document).ready(function(){
   $('#addQuestion').click(function(){
     var text = $('#newQuestionText')[0].value.trim();
+    var description = $('#newQuestionDesc')[0].value.trim();
     if(text != ""){
       $('#questionTextVal').addClass("hidden");
       $('#questionSuccess').removeClass("hidden");
       setTimeout(function(){
         $('#questionSuccess').animate({opacity:'0'}, 1000, function(){
           $('#questionSuccess').addClass("hidden");
-          $('#questionSuccess').attr('opacity', '1');
+          $('#questionSuccess')[0].style.opacity = 1;
         });
       }, 2000);
-      var questionID = addQuestion(text);
+      var questionID = addQuestion(text, description);
       updateSelections();
       $('#newQuestionText')[0].value = "";
     }
@@ -145,16 +149,17 @@ $(document).ready(function(){
 
   $('#addResult').click(function(){
     var text = $('#newResultText')[0].value.trim();
+    var description = $('#newResultDesc')[0].value.trim();
     if(text != ""){
       $('#resultTextVal').addClass("hidden");
       $('#resultSuccess').removeClass("hidden");
       setTimeout(function(){
         $('#resultSuccess').animate({opacity:'0'}, 1000, function(){
           $('#resultSuccess').addClass("hidden");
-          $('#resultSuccess').attr('opacity', '1');
+          $('#resultSuccess')[0].style.opacity = 1;
         });
       }, 2000);
-      var resultID = addResult(text);
+      var resultID = addResult(text, description);
       updateSelections();
       $('#newResultText')[0].value = "";
     }
@@ -188,7 +193,7 @@ $(document).ready(function(){
       setTimeout(function(){
         $('#answerSuccess').animate({opacity:'0'}, 1000, function(){
           $('#answerSuccess').addClass("hidden");
-          $('#answerSuccess').attr('opacity', '1');
+          $('#answerSuccess')[0].style.opacity = 1;
         });
       }, 2000);
       $('#newAnswerText')[0].value = "";
@@ -197,5 +202,38 @@ $(document).ready(function(){
     }
   });
 
-  $('#downloadButton').click(exportToJson);
+  $('#downloadButton').click(function(){
+    var invalidQuestions = [];
+    var validated = true;
+    var errorMessage;
+    for(var i = 0; i < questions.length; i++){
+      if(questions[i].answers.length == 0){
+        validated = false;
+        invalidQuestions.push(questions[i].text);
+      }
+    }
+
+    if(!validated){
+      errorMessage = `The following question have no linked answers! Did you mean to make these results?<br><br> ${invalidQuestions.join(", ")}`;
+    }
+
+    if(results.length == 0){
+      errorMessage = "You haven't added any results!";
+      validated = false;
+    }
+
+    if(questions.length == 0){
+      errorMessage = "You haven't added any questions!";
+      validated = false;
+    }
+
+    if(validated){
+      $('#exportVal').addClass("hidden");
+      exportToJson();
+    }
+    else{
+      $('#exportVal')[0].innerHTML = errorMessage;
+      $('#exportVal').removeClass("hidden");
+    }
+  });
 });

@@ -15,8 +15,23 @@ h2{
   margin: 5px;
 }
 
-#input{
+p{
+  background-color: white;
+  border-style: solid transparent;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#inputSection{
   width: 50%;
+}
+
+input{
+  margin-bottom: 10px;
+}
+
+select{
+  margin-bottom: 10px;
 }
 
 #tutorial{
