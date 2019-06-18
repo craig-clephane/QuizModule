@@ -113,7 +113,7 @@ function updateSelections(){
   for(var i = 0; i < results.length; i++){
     $('#nextPage')[0].innerHTML += `<option value="${results[i].id}">${results[i].text}</option>`;
     $('#results')[0].innerHTML += `<option value="${results[i].id}">${results[i].text}</option>`;
-    $('#list')[0].innerHTML += `<h4>Result: ${results[i].text}<h4>`;
+    $('#list')[0].innerHTML += `<h4>Result: ${results[i].text}</h4>`;
   }
   for(var i = 0; i < answers.length; i++){
     $('#answers')[0].innerHTML += `<option value="${answers[i].id}">${answers[i].text}</option>`;
