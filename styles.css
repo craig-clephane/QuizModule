@@ -79,6 +79,25 @@ h2{
   line-height: 1.42857;
 }
 
+.warning{
+  margin: 5px;
+  margin-left: 0;
+  border-style: solid transparent;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #F0E0E0;
+  color: red;
+}
+
+.success{
+  position: absolute;
+  border-style: solid transparent;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #E0F0E0;
+  color: green;
+}
+
 #newResult{
   margin: 10px;
   width: 100%;

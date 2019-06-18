@@ -22,6 +22,15 @@ function getQuiz(quizURL){
   });
 }
 
+function inIframe(){
+  try{
+    return window.self !== window.top;
+  }
+  catch(e){
+    return true;
+  }
+}
+
 $(document).ready(function(){
   questionArea = $('#questionArea')[0];
   answersArea = $('#answersArea')[0];

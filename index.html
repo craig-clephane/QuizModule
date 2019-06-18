@@ -17,20 +17,28 @@
   </section>
   <section id="input">
     <div id="newQuestion">
+      <label id="questionSuccess" class="success hidden">Question added!</label>
       <h2>New Question</h2>
       <label>Question text: </label><input type="text" id="newQuestionText">
+      <label id="questionTextVal" class="warning hidden">Question text cannot be empty!</label>
       <button id="addQuestion" class="btn">Add</button>
     </div>
     <div id="newResult">
+      <label id="resultSuccess" class="success hidden">Result added!</label>
       <h2>New Result</h2>
       <label>Result text: </label><input type="text" id="newResultText">
+      <label id="resultTextVal" class="warning hidden">Result text cannot be empty!</label>
       <button id="addResult" class="btn">Add</button>
     </div>
     <div id="newAnswer">
+      <label id="answerSuccess" class="success hidden">Answer added!</label>
       <h2>New Answer</h2>
       <label>Answer text: </label><input type="text" id="newAnswerText">
+      <label id="answerTextVal" class="warning hidden">Answer text cannot be empty!</label>
       <label>Answer to: </label><select name="question" id="displayPage"></select>
+      <label id="answerToVal" class="warning hidden">'Answer to' cannot be empty!</label>
       <label>Leads to: </label><select name="next" id="nextPage"></select>
+      <label id="leadsToVal" class="warning hidden">'Leads to' cannot be empty!</label>
       <button id="addAnswer" class="btn">Add</button>
     </div>
     <div id="delete">

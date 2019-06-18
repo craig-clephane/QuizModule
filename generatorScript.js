@@ -125,22 +125,76 @@ function exportToJson(){
 $(document).ready(function(){
   $('#addQuestion').click(function(){
     var text = $('#newQuestionText')[0].value;
-    var questionID = addQuestion(text);
-    updateSelections();
+    if(text != ""){
+      $('#questionTextVal').addClass("hidden");
+      $('#questionSuccess').removeClass("hidden");
+      setTimeout(function(){
+        $('#questionSuccess').animate({opacity:'0'}, 1000, function(){
+          $('#questionSuccess').addClass("hidden");
+          $('#questionSuccess').attr('opacity', '1');
+        });
+      }, 2000);
+      var questionID = addQuestion(text);
+      updateSelections();
+      $('#newQuestionText')[0].value = "";
+    }
+    else{
+      $('#questionTextVal').removeClass("hidden");
+    }
   });
 
   $('#addResult').click(function(){
     var text = $('#newResultText')[0].value;
-    var resultID = addResult(text);
-    updateSelections();
+    if(text != ""){
+      $('#resultTextVal').addClass("hidden");
+      $('#resultSuccess').removeClass("hidden");
+      setTimeout(function(){
+        $('#resultSuccess').animate({opacity:'0'}, 1000, function(){
+          $('#resultSuccess').addClass("hidden");
+          $('#resultSuccess').attr('opacity', '1');
+        });
+      }, 2000);
+      var resultID = addResult(text);
+      updateSelections();
+      $('#newResultText')[0].value = "";
+    }
+    else{
+      $('#resultTextVal').removeClass("hidden");
+    }
   });
 
   $('#addAnswer').click(function(){
     var text = $('#newAnswerText')[0].value;
     var display = $('#displayPage')[0].value;
     var linksTo = $('#nextPage')[0].value;
-    var answerID = addAnswer(text, display, linksTo);
-    updateSelections();
+    var validated = true;
+    if(text == ""){
+      $('#answerTextVal').removeClass("hidden");
+      validated = false;
+    }
+    if(display == ""){
+      $('#answerToVal').removeClass("hidden");
+      validated = false;
+    }
+    if(linksTo == ""){
+      $('#leadsToVal').removeClass("hidden");
+      validated = false;
+    }
+    if(validated){
+      $('#answerTextVal').addClass("hidden");
+      $('#answerToVal').addClass("hidden");
+      $('#leadsToVal').addClass("hidden");
+      $('#answerSuccess').removeClass("hidden");
+      setTimeout(function(){
+        $('#answerSuccess').animate({opacity:'0'}, 1000, function(){
+          $('#answerSuccess').addClass("hidden");
+          $('#answerSuccess').attr('opacity', '1');
+        });
+      }, 2000);
+      $('#newAnswerText')[0].value = "";
+      var answerID = addAnswer(text, display, linksTo);
+      updateSelections();
+    }
   });
 
   $('#downloadButton').click(exportToJson);
