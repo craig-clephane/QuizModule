@@ -8,14 +8,21 @@
   <script src="generatorScript.js" type="text/javascript"></script>
 </head>
 <body id="generator">
-  <section id="tutorial">
-    <h2>Tutorial</h2>
-    <p>First, draw up a plan for a quiz, including what questions have what answers, and where each answer will take you. For example, answering "yes" to "are you sure" might take you to another question that says "Are you *really* sure?"</p>
-    <p>Then, start by adding each question and result. Questions need answers, but the relationship between them will be created when you make an answer object</p>
-    <p>Once the questions and results have been created, you can start adding the answers. "answer to" relates to the question the answer relates to, and "leads to" refers to what will be shown if the answer is selected.</p>
-    <p>When the questions, results and answers have all been added, hit "Generate JSON" at the bottom to receive your quiz file!</p>
+  <section id="rightSection">
+    <div id="tutorial">
+      <h2>Tutorial</h2>
+      <p>First, draw up a plan for a quiz, including what questions have what answers, and where each answer will take you. For example, answering "yes" to "are you sure" might take you to another question that says "Are you *really* sure?"</p>
+      <p>Then, start by adding each question and result. Questions need answers, but the relationship between them will be created when you make an answer object</p>
+      <p>Once the questions and results have been created, you can start adding the answers. "answer to" relates to the question the answer relates to, and "leads to" refers to what will be shown if the answer is selected.</p>
+      <p>When the questions, results and answers have all been added, hit "Generate JSON" at the bottom to receive your quiz file!</p>
+    </div>
+    <div id="listArea">
+      <h2>Entries</h2>
+      <div id="list">
+      </div>
+    </div>
   </section>
-  <section id="inputSection">
+  <section id="leftSection">
     <div id="newQuestion">
       <label id="questionSuccess" class="success hidden">Question added!</label>
       <h2>New Question</h2>

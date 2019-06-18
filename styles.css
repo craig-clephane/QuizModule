@@ -22,8 +22,18 @@ p{
   padding: 5px;
 }
 
-#inputSection{
+#leftSection{
   width: 50%;
+  box-sizing: border-box;
+  float: left;
+  padding: 20px;
+}
+
+#rightSection{
+  width: 50%;
+  float: right;
+  box-sizing: border-box;
+  padding: 20px;
 }
 
 input{
@@ -35,20 +45,53 @@ select{
 }
 
 #tutorial{
-  position: absolute;
-  width: 30%;
+  width: 100%;
   left: 60%;
   overflow: wrap;
-  margin: 10px;
-  margin-top: 0;
+  margin-bottom: 10px;
   padding: 20px;
   background-color: lightgrey;
   border-style: solid transparent;
   border-radius: 10px;
+  box-sizing: border-box;
+}
+
+#listArea{
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: lightgrey;
+  border-style: solid transparent;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+#list{
+  width: 100%;
+}
+
+#list div{
+  background-color: white;
+  border-style: solid transparent;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+h4{
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+h5{
+  margin: 0;
+  margin-left: 40px;
 }
 
 #newQuestion{
-  margin: 10px;
+  margin-bottom: 10px;
   width: 100%;
   padding: 20px;
   display: flex;
@@ -56,10 +99,11 @@ select{
   background-color: lightgrey;
   border-style: solid transparent;
   border-radius: 10px;
+  box-sizing: border-box;
 }
 
 #download{
-  margin: 10px;
+  margin-bottom: 10px;
   width: 100%;
   padding: 20px;
   display: flex;
@@ -67,6 +111,7 @@ select{
   background-color: lightgrey;
   border-style: solid transparent;
   border-radius: 10px;
+  box-sizing: border-box;
 }
 .btn{
   display: inline-block;
@@ -114,7 +159,7 @@ select{
 }
 
 #newResult{
-  margin: 10px;
+  margin-bottom: 10px;
   width: 100%;
   padding: 20px;
   display: flex;
@@ -122,10 +167,11 @@ select{
   background-color: lightgrey;
   border-style: solid transparent;
   border-radius: 10px;
+  box-sizing: border-box;
 }
 
 #newAnswer{
-  margin: 10px;
+  margin-bottom: 10px;
   width: 100%;
   padding: 20px;
   display: flex;
@@ -133,10 +179,11 @@ select{
   background-color: lightgrey;
   border-style: solid transparent;
   border-radius: 10px;
+  box-sizing: border-box;
 }
 
 #delete{
-  margin: 10px;
+  margin-bottom: 10px;
   width: 100%;
   padding: 20px;
   display: flex;
@@ -144,6 +191,7 @@ select{
   background-color: lightgrey;
   border-style: solid transparent;
   border-radius: 10px;
+  box-sizing: border-box;
 }
 
 #questionArea{

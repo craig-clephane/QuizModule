@@ -103,17 +103,26 @@ function updateSelections(){
   $('#questions')[0].innerHTML = "";
   $('#results')[0].innerHTML = "";
   $('#answers')[0].innerHTML = "";
+  $('#list')[0].innerHTML = "";
   for(var i = 0; i < questions.length; i++){
     $('#displayPage')[0].innerHTML += `<option value="${questions[i].id}">${questions[i].text}</option>`;
     $('#nextPage')[0].innerHTML += `<option value="${questions[i].id}">${questions[i].text}</option>`;
     $('#questions')[0].innerHTML += `<option value="${questions[i].id}">${questions[i].text}</option>`;
+    $('#list')[0].innerHTML += `<div id="question${questions[i].id}"><h4>${questions[i].text}</h4></div>`;
   }
   for(var i = 0; i < results.length; i++){
     $('#nextPage')[0].innerHTML += `<option value="${results[i].id}">${results[i].text}</option>`;
     $('#results')[0].innerHTML += `<option value="${results[i].id}">${results[i].text}</option>`;
+    $('#list')[0].innerHTML += `<h4>${results[i].text}<h4>`;
   }
   for(var i = 0; i < answers.length; i++){
     $('#answers')[0].innerHTML += `<option value="${answers[i].id}">${answers[i].text}</option>`;
+    if(getQuestion(answers[i].linksTo) != -1){
+      $("#question" + answers[i].displayQuestion)[0].innerHTML += `<h5>${answers[i].text}(links to: ${questions[getQuestion(answers[i].linksTo)].text}</h5>`;
+    }
+    else{
+      $("#question" + answers[i].displayQuestion)[0].innerHTML += `<h5>${answers[i].text}(links to: ${results[getResult(answers[i].linksTo)].text}</h5>`;
+    }
   }
 }
 
