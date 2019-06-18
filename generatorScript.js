@@ -59,12 +59,23 @@ function removeQuestion(questionID){
   for(var i = 0; i < linkedAnswers.length; i++){
     removeAnswer(linkedAnswers[i]);
   }
+  questions.splice(questions.indexOf(questionID), 1);
+}
+
+function removeResult(resultID){
+  for(var i = 0; i < answers.length; i++){
+    if(answers[i].linksTo == resultID){
+      removeAnswer(answers[i].id);
+    }
+  }
+  results.splice(results.indexOf(resultID), 1);
 }
 
 function removeAnswer(answerID){
-  for(var i = questions[getQuestion(answers[getAnswer(answerID)].displayQuestion)].answers.length-1; i <= 0; i--){
-    if(questions[getQuestion(answers[getAnswer(answerID)].displayQuestion)].answers[i] == answerID){
-      questions[getQuestion(answers[getAnswer(answerID)].displayQuestion)].answers.splice(i, 1);
+  var question = getQuestion(answers[getAnswer(answerID)].displayQuestion);
+  for(var i = questions[question].answers.length-1; i >= 0; i--){
+    if(questions[question].answers[i] == answerID){
+      questions[question].answers.splice(i, 1);
     }
   }
   answers.splice(answers.indexOf(answerID), 1);
@@ -244,5 +255,20 @@ $(document).ready(function(){
       $('#exportVal')[0].innerHTML = errorMessage;
       $('#exportVal').removeClass("hidden");
     }
+  });
+
+  $('#deleteQuestion').click(function(){
+    removeQuestion($('#questions')[0].value);
+    updateSelections();
+  });
+
+  $('#deleteResult').click(function(){
+    removeResult($('#results')[0].value);
+    updateSelections();
+  });
+
+  $('#deleteAnswer').click(function(){
+    removeAnswer($('#answers')[0].value);
+    updateSelections();
   });
 });
