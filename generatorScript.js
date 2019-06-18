@@ -108,7 +108,7 @@ function updateSelections(){
     $('#displayPage')[0].innerHTML += `<option value="${questions[i].id}">${questions[i].text}</option>`;
     $('#nextPage')[0].innerHTML += `<option value="${questions[i].id}">${questions[i].text}</option>`;
     $('#questions')[0].innerHTML += `<option value="${questions[i].id}">${questions[i].text}</option>`;
-    $('#list')[0].innerHTML += `<div id="question${questions[i].id}"><h4>Question: ${questions[i].text}</h4></div>`;
+    $('#list')[0].innerHTML += `<div id="question${questions[i].id}" class="question"><h4>Question: ${questions[i].text}</h4></div>`;
   }
   for(var i = 0; i < results.length; i++){
     $('#nextPage')[0].innerHTML += `<option value="${results[i].id}">${results[i].text}</option>`;
@@ -118,10 +118,10 @@ function updateSelections(){
   for(var i = 0; i < answers.length; i++){
     $('#answers')[0].innerHTML += `<option value="${answers[i].id}">${answers[i].text}</option>`;
     if(getQuestion(answers[i].linksTo) != -1){
-      $("#question" + answers[i].displayQuestion)[0].innerHTML += `<h5>- ${answers[i].text}(links to: ${questions[getQuestion(answers[i].linksTo)].text}</h5>`;
+      $("#question" + answers[i].displayQuestion)[0].innerHTML += `<h5>- ${answers[i].text} (links to Question: ${questions[getQuestion(answers[i].linksTo)].text})</h5>`;
     }
     else{
-      $("#question" + answers[i].displayQuestion)[0].innerHTML += `<h5>- ${answers[i].text}(links to: ${results[getResult(answers[i].linksTo)].text}</h5>`;
+      $("#question" + answers[i].displayQuestion)[0].innerHTML += `<h5>- ${answers[i].text} (links to Result: ${results[getResult(answers[i].linksTo)].text})</h5>`;
     }
   }
 }
@@ -142,11 +142,11 @@ $(document).ready(function(){
       $('#questionTextVal').addClass("hidden");
       $('#questionSuccess').removeClass("hidden");
       setTimeout(function(){
-        $('#questionSuccess').animate({opacity:'0'}, 1000, function(){
+        $('#questionSuccess').animate({opacity:'0'}, 500, function(){
           $('#questionSuccess').addClass("hidden");
           $('#questionSuccess')[0].style.opacity = 1;
         });
-      }, 2000);
+      }, 500);
       var questionID = addQuestion(text, description);
       updateSelections();
       $('#newQuestionText')[0].value = "";
@@ -163,11 +163,11 @@ $(document).ready(function(){
       $('#resultTextVal').addClass("hidden");
       $('#resultSuccess').removeClass("hidden");
       setTimeout(function(){
-        $('#resultSuccess').animate({opacity:'0'}, 1000, function(){
+        $('#resultSuccess').animate({opacity:'0'}, 500, function(){
           $('#resultSuccess').addClass("hidden");
           $('#resultSuccess')[0].style.opacity = 1;
         });
-      }, 2000);
+      }, 500);
       var resultID = addResult(text, description);
       updateSelections();
       $('#newResultText')[0].value = "";
@@ -200,11 +200,11 @@ $(document).ready(function(){
       $('#leadsToVal').addClass("hidden");
       $('#answerSuccess').removeClass("hidden");
       setTimeout(function(){
-        $('#answerSuccess').animate({opacity:'0'}, 1000, function(){
+        $('#answerSuccess').animate({opacity:'0'}, 500, function(){
           $('#answerSuccess').addClass("hidden");
           $('#answerSuccess')[0].style.opacity = 1;
         });
-      }, 2000);
+      }, 500);
       $('#newAnswerText')[0].value = "";
       var answerID = addAnswer(text, display, linksTo);
       updateSelections();
