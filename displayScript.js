@@ -35,10 +35,9 @@ $(document).ready(function(){
   questionArea = $('#questionArea')[0];
   answersArea = $('#answersArea')[0];
   if(inIframe()){
-    //var frame = parent.window.getElementById("quizFrame");
-    console.log(window.location.search.slice(4));
-    //var quizURL = frame.data("quizURL");
-    //$.getJSON(quizURL, interpretQuiz);
+    var quizURL = window.location.search.slice(5);
+    console.log(window.location.search.slice(5));
+    $.getJSON(quizURL, interpretQuiz);
   }
   else{
     $.getJSON('https://dinkieshy.github.io/QuizModule/quiz.json', interpretQuiz);
