@@ -34,7 +34,14 @@ function inIframe(){
 $(document).ready(function(){
   questionArea = $('#questionArea')[0];
   answersArea = $('#answersArea')[0];
-  $.getJSON('https://dinkieshy.github.io/QuizModule/quiz.json', interpretQuiz);
+  if(inIframe()){
+    var frame = window.frameElement;
+    var quizURL = frame.data("quizURL");
+    $.getJSON(quizURL, interpretQuiz);
+  }
+  else{
+    $.getJSON('https://dinkieshy.github.io/QuizModule/quiz.json', interpretQuiz);
+  }
 });
 
 function updateDisplay(){
@@ -58,7 +65,7 @@ function updateDisplay(){
     }
     answersArea.innerHTML = "";
     for(var i = 0; i < questions[activeQuestion].answers.length; i++){
-      answersArea.innerHTML += `<button class="btn" id="${questions[activeQuestion].answers[i]}" onclick="showNext(event)">${answers[getAnswer(questions[activeQuestion].answers[i])].text}</button>`;
+      answersArea.innerHTML += `<button class="btn answerButton" id="${questions[activeQuestion].answers[i]}" onclick="showNext(event)">${answers[getAnswer(questions[activeQuestion].answers[i])].text}</button>`;
     }
   }
 }

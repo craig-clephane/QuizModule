@@ -4,6 +4,11 @@
   padding: 0;
 }
 
+body{
+  height: 100%;
+  width: 100%;
+}
+
 html{
   margin: 0;
   padding: 0;
@@ -205,28 +210,75 @@ h5{
 }
 
 #questionArea{
-  width: 100%;
   border-style: solid transparent;
   border-radius: 10px;
+  height: 60vh;
+  box-sizing: border-box;
   margin: 10px;
   padding: 20px;
   background-color: lightgrey;
 }
 
 #answersArea{
-  width: 100%;
-  border-style: solid transparent;
-  border-radius: 10px;
+  position: relative;
   margin: 10px;
   padding: 20px;
+  border-style: solid transparent;
+  border-radius: 10px;
   background-color: lightgrey;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.answerButton{
+  margin: 10px;
+  min-height: 10vh;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.questionDisplay{
+  font-size: 3em;
+  text-align: center;
 }
 
 #resultsArea{
+  border-style: solid;
+  background-color: lightgrey;
+  border-width: 10px;
+  border-radius: 20px;
+  border-color: white;
+  padding: 20px;
   width: 100vw;
   height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.resultDisplay{
+  font-size: 3em;
+  vertical-align: text-bottom;
+  text-align: center;
+}
+
+.resultDescription{
+  font-size: 1.8em;
+  text-align: center;
+  display: inline-block;
+  padding: 20px;
+}
+
+#quiz{
+  margin: 0;
+  padding: 0;
 }
 
 .hidden{
-  display: none;
+  display: none !important;
 }
