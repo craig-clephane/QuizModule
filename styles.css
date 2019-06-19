@@ -25,11 +25,13 @@ h2{
 }
 
 p{
-  background-color: white;
+  background-color: #FFF;
   border-style: solid transparent;
   border-radius: 5px;
   padding: 5px;
   word-wrap: break-word;
+  padding: 0.6em 1em;
+  line-height: 1.42857;
 }
 
 #leftSection{
@@ -133,6 +135,7 @@ h5{
   border-radius: 10px;
   box-sizing: border-box;
 }
+
 .btn{
   display: inline-block;
   margin-bottom: 0;
