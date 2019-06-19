@@ -67,7 +67,14 @@ function updateDisplay(){
     for(var i = 0; i < questions[activeQuestion].answers.length; i++){
       answersArea.innerHTML += `<button class="btn answerButton" id="${questions[activeQuestion].answers[i]}" onclick="showNext(event)">${answers[getAnswer(questions[activeQuestion].answers[i])].text}</button>`;
     }
+    scrollToMiddle();
   }
+}
+
+function scrollToMiddle(){
+  var outerContent = $('#answersArea');
+  var innerContent = $('#answersArea > .answerButton');
+  outerContent.scrollLeft((innerContent.width() - outerContent.width()) / 2);
 }
 
 function showNext(event){
