@@ -39,16 +39,23 @@ $(document).ready(function(){
 
 function updateDisplay(){
   var activeQuestion = getQuestion(activeDisplayID);
+  var activeResult = getResult(activeDisplayID);
   if(activeQuestion == -1){
     //display result
     $('#questionArea').addClass('hidden');
     $('#answersArea').addClass('hidden');
     $('#resultsArea').removeClass('hidden');
-    resultsArea.innerHTML = `<h3 class="resultDisplay">${results[getResult(activeDisplayID)].text}</h3><p class="resultDescription">${results[getResult(activeDisplayID)].description}</p>`;
+    resultsArea.innerHTML = `<h3 class="resultDisplay">${results[activeResult].text}</h3>`;
+    if(results[activeResult].description != "" && results[activeResult].description != undefined){
+      resultsArea.innerHTML += `<p class="resultDescription">${results[activeResult].description}</p>`;
+    }
   }
   else{
     //display question/answer
-    questionArea.innerHTML = `<h3 class="questionDisplay">${questions[activeQuestion].text}</h3><p class="questionDescription">${questions[getQuestion(activeDisplayID)].description}</p>`;
+    questionArea.innerHTML = `<h3 class="questionDisplay">${questions[activeQuestion].text}</h3>`;
+    if(questions[activeQuestion].description != "" && questions[activeQuestion].description != undefined){
+      questionArea.innerHTML += `<p class="questionDescription">${questions[getQuestion(activeDisplayID)].description}</p>`;
+    }
     answersArea.innerHTML = "";
     for(var i = 0; i < questions[activeQuestion].answers.length; i++){
       answersArea.innerHTML += `<button class="btn" id="${questions[activeQuestion].answers[i]}" onclick="showNext(event)">${answers[getAnswer(questions[activeQuestion].answers[i])].text}</button>`;
