@@ -37,6 +37,7 @@ $(document).ready(function(){
   if(inIframe()){
     var frame = window.frameElement;
     var quizURL = frame.data("quizURL");
+    console.log(quizURL);
     $.getJSON(quizURL, interpretQuiz);
   }
   else{
