@@ -229,6 +229,7 @@ h5{
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
+  overflow-x: scroll;
 }
 
 .answerButton{
