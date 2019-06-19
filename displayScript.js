@@ -36,7 +36,7 @@ $(document).ready(function(){
   answersArea = $('#answersArea')[0];
   if(inIframe()){
     var frame = $('#quizFrame');
-    console.log(window.context.all[0].parentNode);
+    console.log(window);
     var quizURL = frame.data("quizURL");
     console.log(quizURL);
     $.getJSON(quizURL, interpretQuiz);
