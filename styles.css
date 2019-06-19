@@ -29,6 +29,7 @@ p{
   border-style: solid transparent;
   border-radius: 5px;
   padding: 5px;
+  word-wrap: break-word;
 }
 
 #leftSection{
@@ -276,6 +277,7 @@ h5{
   text-align: center;
   display: inline-block;
   padding: 20px;
+  word-wrap: break-word;
 }
 
 #quiz{
@@ -286,4 +288,30 @@ h5{
 
 .hidden{
   display: none !important;
+}
+
+
+/* !important is needed sometimes */
+#answersArea ::-webkit-scrollbar {
+  width: 12px !important;
+  height: 30px;
+}
+
+/* Track */
+#answersArea ::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3) !important;
+  -webkit-border-radius: 10px !important;
+  border-radius: 10px !important;
+}
+
+/* Handle */
+#answersArea ::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px !important;
+  border-radius: 10px !important;
+  background: #41617D !important;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5) !important;
+}
+
+#answersArea ::-webkit-scrollbar-thumb:window-inactive {
+  background: #41617D !important;
 }
