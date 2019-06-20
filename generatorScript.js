@@ -73,14 +73,11 @@ function removeResult(resultID){
 
 function removeAnswer(answerID){
   var question = getQuestion(answers[getAnswer(answerID)].displayQuestion);
-  console.log(answers[getAnswer(answerID)]);
-  console.log(questions[question]);
   for(var i = questions[question].answers.length-1; i >= 0; i--){
     if(questions[question].answers[i] == answerID){
       questions[question].answers.splice(i, 1);
     }
   }
-  console.log(questions[question]);
   answers.splice(getAnswer(answerID), 1);
 }
 
@@ -150,7 +147,6 @@ function exportToJson(){
 
 function importFile(){
   var files = document.getElementById('selectFile').files;
-  console.log(files);
   if (files.length <= 0) {
     return false;
   }
@@ -160,7 +156,6 @@ function importFile(){
   fr.onload = function(e) {
     var result = JSON.parse(e.target.result);
     var formatted = JSON.stringify(result, null, 2);
-    console.log(result);
     questions = result[0];
     results = result[1];
     answers = result[2];
