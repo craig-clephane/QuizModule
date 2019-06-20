@@ -59,7 +59,7 @@ function removeQuestion(questionID){
   for(var i = 0; i < linkedAnswers.length; i++){
     removeAnswer(linkedAnswers[i]);
   }
-  questions.splice(questions.indexOf(questionID), 1);
+  questions.splice(getQuestion(questionID), 1);
 }
 
 function removeResult(resultID){
@@ -68,17 +68,20 @@ function removeResult(resultID){
       removeAnswer(answers[i].id);
     }
   }
-  results.splice(results.indexOf(resultID), 1);
+  results.splice(getResult(resultID), 1);
 }
 
 function removeAnswer(answerID){
   var question = getQuestion(answers[getAnswer(answerID)].displayQuestion);
+  console.log(answers[getAnswer(answerID)]);
+  console.log(questions[question]);
   for(var i = questions[question].answers.length-1; i >= 0; i--){
     if(questions[question].answers[i] == answerID){
       questions[question].answers.splice(i, 1);
     }
   }
-  answers.splice(answers.indexOf(answerID), 1);
+  console.log(questions[question]);
+  answers.splice(getAnswer(answerID), 1);
 }
 
 function getQuestion(id){
@@ -127,7 +130,7 @@ function updateSelections(){
     $('#list')[0].innerHTML += `<h4>Result: ${results[i].text}</h4>`;
   }
   for(var i = 0; i < answers.length; i++){
-    $('#answers')[0].innerHTML += `<option value="${answers[i].id}">${answers[i].text}</option>`;
+    $('#answers')[0].innerHTML += `<option value="${answers[i].id}">${answers[i].text} (${questions[getQuestion(answers[i].displayQuestion)].text})</option>`;
     if(getQuestion(answers[i].linksTo) != -1){
       $("#question" + answers[i].displayQuestion)[0].innerHTML += `<h5>- ${answers[i].text} (links to Question: ${questions[getQuestion(answers[i].linksTo)].text})</h5>`;
     }
@@ -143,6 +146,28 @@ function exportToJson(){
   var data = "text/json;charset=utf-8," + encodeURIComponent(jsonOutput);
   $('#downloadButton').prop("href", `data:${data}`);
   $('#downloadButton').innerHTML = "Regenerate JSON";
+}
+
+function importFile(){
+  var files = document.getElementById('selectFile').files;
+  console.log(files);
+  if (files.length <= 0) {
+    return false;
+  }
+
+  var fr = new FileReader();
+
+  fr.onload = function(e) {
+    var result = JSON.parse(e.target.result);
+    var formatted = JSON.stringify(result, null, 2);
+    console.log(result);
+    questions = result[0];
+    results = result[1];
+    answers = result[2];
+    updateSelections();
+  }
+
+  fr.readAsText(files.item(0));
 }
 
 $(document).ready(function(){
@@ -271,4 +296,6 @@ $(document).ready(function(){
     removeAnswer($('#answers')[0].value);
     updateSelections();
   });
+
+  $('#importButton').click(importFile);
 });
