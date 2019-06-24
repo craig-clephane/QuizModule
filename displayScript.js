@@ -40,7 +40,13 @@ $(document).ready(function(){
     $.getJSON(quizURL, interpretQuiz);
   }
   else{
-    $.getJSON('https://dinkieshy.github.io/QuizModule/quiz.json', interpretQuiz);
+    var quizURl = window.prompt("Please enter a link to a quiz json file (leave blank for demo)");
+    if(quizURL == ""){
+      $.getJSON('https://dinkieshy.github.io/QuizModule/quiz.json', interpretQuiz);
+    }
+    else{
+      $.getJSON(quizURL, interpretQuiz);
+    }
   }
 });
 
