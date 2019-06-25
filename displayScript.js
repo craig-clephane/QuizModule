@@ -106,7 +106,7 @@ function updateDisplay(){
     }
     else{
       resultsArea.innerHTML += `<div id="quizButtons"><button class="btn" id="retryButton" onclick="retry()">Retry</button>
-      <button class="btn" id="submitButton" onclick="window.top.location=${endURL}?Green=${gCount}&Orange=${oCount}&Red=${rCount}">Submit</button></div>`;
+      <button class="btn" id="submitButton" onclick="window.top.location.href=${endURL}?Green=${gCount}&Orange=${oCount}&Red=${rCount}">Submit</button></div>`;
     }
   }
   else if(activeFeedback != -1){
