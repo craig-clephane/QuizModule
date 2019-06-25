@@ -7,6 +7,9 @@ var questionArea;
 var answerArea;
 var activeDisplayID;
 var endURL;
+var rCount = 0;
+var oCount = 0;
+var gCount = 0;
 
 function interpretQuiz(data){
   questions = data[0];
@@ -65,9 +68,28 @@ function updateDisplay(){
     $('#answersArea').addClass('hidden');
     $('#resultsArea').removeClass('hidden');
     if(results[activeResult].showAnswers == true){
-      resultsArea.innerHTML = `<h3 class="questionDisplay">${results[activeResult].text}</h3><p class="questionDescription">${results[activeResult].description}</p>`;
+      resultsArea.innerHTML = `<h3 class="questionDisplay">${results[activeResult].text}</h3>`;
+      if(results[activeResult].description != ""){
+        resultsArea.innerHTMl += `<p class="questionDescription">${results[activeResult].description}</p>`;
+      }
       for(var i = 0; i < responses.length; i++){
-        resultsArea.innerHTML += `<p>${i}</p>`;
+        resultsArea.innerHTML += `<p class="answer" id="answer${responses[i]}">${i}</p>`;
+        var colour;
+        switch(getAnswer(responses[i]).col){
+          case 'r':
+            rCount++;
+            colour = '#F03030';
+          break;
+          case 'o':
+            oCount++;
+            colour = '#F07530';
+          break;
+          case 'g':
+            gCount++;
+            colour = '#30B030';
+          break;
+        }
+        $('#answer' + responses[i]).color = colour;
       }
     }
     else{
@@ -76,6 +98,8 @@ function updateDisplay(){
         resultsArea.innerHTML += `<p class="resultDescription">${results[activeResult].description}</p>`;
       }
     }
+    resultsArea.innerHTML += `<button class="btn" id="retryButton" onclick="retry()">Retry</button>`;
+    resultsArea.innerHTML += `<button class="btn" id="submitButton" onclick="submit()">Submit</button>`;
   }
   else if(activeFeedback != -1){
     questionArea.innerHTML = `<h3 class="questionDisplay">${answers[getAnswer(feedbacks[getFeedback(activeFeedback)].answer)].text}</h3>`;
@@ -94,9 +118,37 @@ function updateDisplay(){
   }
 }
 
+function retry(){
+  activeDisplayID = questions[0].id;
+  responses = [];
+  updateDisplay();
+  $('#questionArea').removeClass('hidden');
+  $('#answersArea').removeClass('hidden');
+  $('#resultsArea').addClass('hidden');
+}
+
+function submit(){
+  if(endURL == "" || endURL == undefined){
+    if(inIframe()){
+      window.top.history.go(-1);
+    }
+    else{
+      window.history.go(-1);
+    }
+  }
+  else{
+    if(inIframe()){
+      window.top.location.href = endURL;
+    }
+    else{
+      window.location.href = endURL;
+    }
+  }
+}
+
 function showNext(event){
   var answer = answers[getAnswer(event.currentTarget.id)];
-  responses.push(answer);
+  responses.push(event.currentTarget.id);
   activeDisplayID = answer.linksTo;
   updateDisplay();
 }
