@@ -18,7 +18,6 @@ function interpretQuiz(data){
   answers = data[2];
   feedbacks = data[3];
   updateDisplay();
-  console.log(data);
 }
 
 function getQuiz(quizURL){
@@ -46,6 +45,7 @@ $(document).ready(function(){
     var input = parseQueryString(window.location.search);
     var quizURL = input.quizURL;
     endURL = input.endURL;
+    console.log(input);
     $.getJSON(quizURL, interpretQuiz);
   }
   else{
