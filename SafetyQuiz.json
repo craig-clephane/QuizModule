@@ -13,7 +13,7 @@
 ],[
   {"id":10,"text":"Begin","col":"none","displayQuestion":"0","linksTo":"1"},
   {"id":11,"text":"I know when and where","col":"g","displayQuestion":"1","linksTo":12},
-  {"id":13,"text":"I don't know where I'm going","col":"o","displayQuestion":"1","linksTo":14},
+  {"id":13,"text":"I don't know where I'm going","col":"r","displayQuestion":"1","linksTo":14},
   {"id":15,"text":"I know where, but not when I'm leaving","col":"o","displayQuestion":"1","linksTo":16},
   {"id":17,"text":"Taxi","col":"g","displayQuestion":"2","linksTo":18},
   {"id":19,"text":"I know the area","col":"o","displayQuestion":"2","linksTo":20},
