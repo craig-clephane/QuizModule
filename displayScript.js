@@ -79,15 +79,15 @@ function updateDisplay(){
         var colour = "grey";
         switch(answers[getAnswer(responses[i])].col){
           case 'r':
-            rCount++;
+            rCount += 1;
             colour = '#F03030';
           break;
           case 'o':
-            oCount++;
+            oCount += 1;
             colour = '#F0A000';
           break;
           case 'g':
-            gCount++;
+            gCount += 1;
             colour = '#30B030';
           break;
         }
@@ -106,7 +106,7 @@ function updateDisplay(){
     }
     else{
       resultsArea.innerHTML += `<div id="quizButtons"><button class="btn" id="retryButton" onclick="retry()">Retry</button>
-      <button class="btn" id="submitButton" href="${endURL}">Submit</button></div>`;
+      <button class="btn" id="submitButton" href="${endURL}?Green=${gCount}&Orange=${oCount}&Red=${rCount}">Submit</button></div>`;
     }
   }
   else if(activeFeedback != -1){
