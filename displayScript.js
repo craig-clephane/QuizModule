@@ -65,7 +65,7 @@ function updateDisplay(){
     $('#answersArea').addClass('hidden');
     $('#resultsArea').removeClass('hidden');
     if(results[activeResult].showAnswers == true){
-      resultsArea.innerHTML = `<h3 class="questionDisplay">${results[getResult(activeResult)].text}</h3><p class="questionDescription">${results[getResult(activeResult)].description}</p>`;
+      resultsArea.innerHTML = `<h3 class="questionDisplay">${results[activeResult].text}</h3><p class="questionDescription">${results[activeResult].description}</p>`;
       for(var i = 0; i < responses.length; i++){
         resultsArea.innerHTML += `<p>${i}</p>`;
       }
