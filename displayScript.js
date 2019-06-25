@@ -101,14 +101,14 @@ function updateDisplay(){
     resultsArea.innerHTML += `<div id="quizButtons"><button class="btn" id="retryButton" onclick="retry()">Retry</button><button class="btn" id="submitButton" onclick="submit()">Submit</button></div>`;
   }
   else if(activeFeedback != -1){
-    questionArea.innerHTML = `<h3 class="questionDisplay">${answers[getAnswer(feedbacks[getFeedback(activeFeedback)].answer)].text}</h3>`;
+    questionArea.innerHTML = `<h3 class="questionDisplay">${answers[getAnswer(feedbacks[activeFeedback].answer)].text}</h3>`;
     answersArea = `<button class="btn answerButton" id="${feedbacks[activeFeedback].answer}" onclick="showNext(event)">Next Question</button>`;
   }
   else{
     //display question/answer
     questionArea.innerHTML = `<h3 class="questionDisplay">${questions[activeQuestion].text}</h3>`;
     if(questions[activeQuestion].description != "" && questions[activeQuestion].description != undefined){
-      questionArea.innerHTML += `<p class="questionDescription">${questions[getQuestion(activeDisplayID)].description}</p>`;
+      questionArea.innerHTML += `<p class="questionDescription">${questions[activeQuestion].description}</p>`;
     }
     answersArea.innerHTML = "";
     for(var i = 0; i < questions[activeQuestion].answers.length; i++){
