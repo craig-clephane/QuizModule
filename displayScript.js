@@ -102,7 +102,7 @@ function updateDisplay(){
   }
   else if(activeFeedback != -1){
     questionArea.innerHTML = `<h3 class="questionDisplay">${answers[getAnswer(feedbacks[activeFeedback].answer)].text}</h3>`;
-    answersArea = `<button class="btn answerButton" id="${feedbacks[activeFeedback].answer}" onclick="showNext(event)">Next Question</button>`;
+    answersArea.innerHTML = `<button class="btn answerButton" id="${feedbacks[activeFeedback].id}" onclick="showNext(event)">Next Question</button>`;
   }
   else{
     //display question/answer
@@ -146,9 +146,15 @@ function submit(){
 }
 
 function showNext(event){
-  var answer = answers[getAnswer(event.currentTarget.id)];
-  responses.push(event.currentTarget.id);
-  activeDisplayID = answer.linksTo;
+  answer = getAnswer(event.currentTarget.id);
+  if(answer == -1){
+    activeDisplayID = feedbacks[getFeedback(event.currentTarget.id)].linksTo;
+  }
+  else{
+    answer = answers[getAnswer(event.currentTarget.id)];
+    responses.push(event.currentTarget.id);
+    activeDisplayID = answer.linksTo;
+  }
   updateDisplay();
 }
 
