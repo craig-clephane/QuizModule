@@ -42,7 +42,7 @@ $(document).ready(function(){
   questionArea = $('#questionArea')[0];
   answersArea = $('#answersArea')[0];
   if(inIframe()){
-    var input = parseQueryString(window.location.search);
+    var input = parseQueryString(window.location.search.slice(1));
     var quizURL = input.quizURL;
     endURL = input.endURL;
     console.log(input);
