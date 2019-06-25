@@ -6,6 +6,7 @@ var responses = [];
 var questionArea;
 var answerArea;
 var activeDisplayID;
+var endURL;
 
 function interpretQuiz(data){
   questions = data[0];
@@ -38,8 +39,9 @@ $(document).ready(function(){
   questionArea = $('#questionArea')[0];
   answersArea = $('#answersArea')[0];
   if(inIframe()){
-    var quizURL = window.location.search.slice(5);
-    console.log(window.location.search.slice(5));
+    var input = parseQueryString(window.location.search);
+    var quizURL = input.quizURL;
+    endURL = input.endURL;
     $.getJSON(quizURL, interpretQuiz);
   }
   else{
@@ -62,9 +64,17 @@ function updateDisplay(){
     $('#questionArea').addClass('hidden');
     $('#answersArea').addClass('hidden');
     $('#resultsArea').removeClass('hidden');
-    resultsArea.innerHTML = `<h3 class="resultDisplay">${results[activeResult].text}</h3>`;
-    if(results[activeResult].description != "" && results[activeResult].description != undefined){
-      resultsArea.innerHTML += `<p class="resultDescription">${results[activeResult].description}</p>`;
+    if(results[activeResult].showAnswers == true){
+      resultsArea.innerHTML = `<h3 class="questionDisplay">${results[getResult(activeResult)].text}</h3><p class="questionDescription">${results[getResult(activeResult)].description}</p>`;
+      for(var i = 0; i < responses.length; i++){
+        resultsArea.innerHTML += `<p>${i}</p>`;
+      }
+    }
+    else{
+      resultsArea.innerHTML = `<h3 class="resultDisplay">${results[activeResult].text}</h3>`;
+      if(results[activeResult].description != "" && results[activeResult].description != undefined){
+        resultsArea.innerHTML += `<p class="resultDescription">${results[activeResult].description}</p>`;
+      }
     }
   }
   else if(activeFeedback != -1){
@@ -81,14 +91,7 @@ function updateDisplay(){
     for(var i = 0; i < questions[activeQuestion].answers.length; i++){
       answersArea.innerHTML += `<button class="btn answerButton" id="${questions[activeQuestion].answers[i]}" onclick="showNext(event)">${answers[getAnswer(questions[activeQuestion].answers[i])].text}</button>`;
     }
-    scrollToMiddle();
   }
-}
-
-function scrollToMiddle(){
-  var outerContent = $('#answersArea');
-  var innerContent = $('#answersArea > .answerButton');
-  outerContent.scrollLeft((innerContent.width() - outerContent.width()) / 2);
 }
 
 function showNext(event){
@@ -132,4 +135,27 @@ function getAnswer(id){
     }
   }
   return -1;
+}
+
+function parseQueryString(query) {
+  //From https://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-get-parameters
+  var vars = query.split("&");
+  var query_string = {};
+  for (var i = 0; i < vars.length; i++) {
+    var pair = vars[i].split("=");
+    var key = decodeURIComponent(pair[0]);
+    var value = decodeURIComponent(pair[1]);
+    // If first entry with this name
+    if (typeof query_string[key] === "undefined") {
+      query_string[key] = decodeURIComponent(value);
+      // If second entry with this name
+    } else if (typeof query_string[key] === "string") {
+      var arr = [query_string[key], decodeURIComponent(value)];
+      query_string[key] = arr;
+      // If third or later entry with this name
+    } else {
+      query_string[key].push(decodeURIComponent(value));
+    }
+  }
+  return query_string;
 }

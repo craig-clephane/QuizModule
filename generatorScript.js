@@ -17,6 +17,7 @@ function Result(){
   maxID += 1;
   this.text = "";
   this.description = "";
+  this.showAnswers = false;
 }
 
 function Answer(){
@@ -45,10 +46,11 @@ function addQuestion(text, description){
   return question.id;
 }
 
-function addResult(text, description){
+function addResult(text, description, show){
   var result = new Result;
   result.text = text;
   result.description = description;
+  result.showAnswers = show;
   results.push(result);
   return result.id;
 }
@@ -62,7 +64,6 @@ function addAnswer(text, displayQuestion, linksTo, col, feedbackText){
     questions[getQuestion(displayQuestion)].answers.push(answer.id);
   }
   answer.col = col;
-  console.log(feedbackText);
   if(feedbackText != ""){
     feedback = new Feedback;
     feedback.text = feedbackText;
@@ -161,7 +162,6 @@ function updateSelections(){
   }
   for(var i = 0; i < answers.length; i++){
     $('#answers')[0].innerHTML += `<option value="${answers[i].id}">${answers[i].text} (${questions[getQuestion(answers[i].displayQuestion)].text})</option>`;
-    console.log(answers[i]);
     if(getFeedback(answers[i].linksTo) != -1){
       if(getQuestion(feedbacks[getFeedback(answers[i].linksTo)].linksTo) != -1){
         $("#question" + answers[i].displayQuestion)[0].innerHTML += `<h5>- ${answers[i].text} (links to Question: ${questions[getQuestion(feedbacks[getFeedback(answers[i].linksTo)].linksTo)].text} via feedback)</h5>`;
@@ -236,6 +236,8 @@ $(document).ready(function(){
   $('#addResult').click(function(){
     var text = $('#newResultText')[0].value.trim();
     var description = $('#newResultDesc')[0].value.trim();
+    var show = $('#newResultShow')[0].checked;
+    console.log(show);
     if(text != ""){
       $('#resultTextVal').addClass("hidden");
       $('#resultSuccess').removeClass("hidden");
@@ -245,10 +247,11 @@ $(document).ready(function(){
           $('#resultSuccess')[0].style.opacity = 1;
         });
       }, 500);
-      var resultID = addResult(text, description);
+      var resultID = addResult(text, description, show);
       updateSelections();
       $('#newResultText')[0].value = "";
       $('#newResultDesc')[0].value = "";
+      $('#newResultShow')[0].checked = true;
     }
     else{
       $('#resultTextVal').removeClass("hidden");
@@ -287,7 +290,6 @@ $(document).ready(function(){
       }, 500);
       $('#newAnswerText')[0].value = "";
       $('#newAnswerFeed')[0].value = "";
-      console.log(feedback);
       var answerID = addAnswer(text, display, linksTo, col, feedback);
       updateSelections();
     }
