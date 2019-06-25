@@ -98,7 +98,14 @@ function updateDisplay(){
         resultsArea.innerHTML += `<p class="resultDescription">${results[activeResult].description}</p>`;
       }
     }
-    resultsArea.innerHTML += `<div id="quizButtons"><button class="btn" id="retryButton" onclick="retry()">Retry</button><button class="btn" id="submitButton" onclick="submit()">Submit</button></div>`;
+    if(endURL == undefined){
+      resultsArea.innerHTML += `<div id="quizButtons"><button class="btn" id="retryButton" onclick="retry()">Retry</button>
+      <button class="btn" id="submitButton" onclick="submit()">Submit</button></div>`;
+    }
+    else{
+      resultsArea.innerHTML += `<div id="quizButtons"><button class="btn" id="retryButton" onclick="retry()">Retry</button>
+      <button class="btn" id="submitButton" href="${endURL}">Submit</button></div>`;
+    }
   }
   else if(activeFeedback != -1){
     questionArea.innerHTML = `<h3 class="questionDisplay">${answers[getAnswer(feedbacks[activeFeedback].answer)].text}</h3><p class="questionDescription">${feedbacks[activeFeedback].text}</p>`;
