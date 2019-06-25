@@ -45,7 +45,7 @@ $(document).ready(function(){
     var input = parseQueryString(window.location.search.slice(1));
     var quizURL = input.quizURL;
     endURL = input.endURL;
-    console.log(input);
+    console.log(quizURL);
     $.getJSON(quizURL, interpretQuiz);
   }
   else{
