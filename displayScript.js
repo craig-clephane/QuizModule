@@ -18,6 +18,7 @@ function interpretQuiz(data){
   answers = data[2];
   feedbacks = data[3];
   updateDisplay();
+  console.log(data);
 }
 
 function getQuiz(quizURL){
