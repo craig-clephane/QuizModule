@@ -137,10 +137,10 @@ function submit(){
   }
   else{
     if(inIframe()){
-      window.top.location.href = endURL;
+      window.top.location.href = endURL + `?Green=${gCount}&Orange=${oCount}&Red=${rCount}`;
     }
     else{
-      window.location.href = endURL;
+      window.location.href = endURL + `?Green=${gCount}&Orange=${oCount}&Red=${rCount}`;
     }
   }
 }
