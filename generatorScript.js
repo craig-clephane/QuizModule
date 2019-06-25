@@ -1,6 +1,7 @@
 var questions = [];
 var answers = [];
 var results = [];
+var feedbacks = [];
 var maxID = 0;
 
 function Question(){
@@ -23,7 +24,17 @@ function Answer(){
   maxID += 1;
   this.text = "";
   this.displayQuestion;
-  this.linksTo = [];
+  this.linksTo;
+  this.col = "";
+  this.feedback;
+}
+
+function Feedback(){
+  this.id = maxID;
+  maxID += 1;
+  this.text = "";
+  this.linksTo;
+  this.answer;
 }
 
 function addQuestion(text, description){
@@ -42,14 +53,27 @@ function addResult(text, description){
   return result.id;
 }
 
-function addAnswer(text, displayQuestion, linksTo){
+function addAnswer(text, displayQuestion, linksTo, col, feedbackText){
   var answer = new Answer;
+  var feedback;
   answer.text = text;
   answer.displayQuestion = displayQuestion;
   if(getQuestion(displayQuestion) != -1){
     questions[getQuestion(displayQuestion)].answers.push(answer.id);
   }
-  answer.linksTo = linksTo;
+  answer.col = col;
+  console.log(feedbackText);
+  if(feedbackText != ""){
+    feedback = new Feedback;
+    feedback.text = feedbackText;
+    feedback.answer = answer.id;
+    feedback.linksTo = linksTo;
+    answer.linksTo = feedback.id;
+    feedbacks.push(feedback);
+  }
+  else{
+    answer.linksTo = linksTo;
+  }
   answers.push(answer);
   return answer.id;
 }
@@ -84,6 +108,15 @@ function removeAnswer(answerID){
 function getQuestion(id){
   for(var i = 0; i < questions.length; i++){
     if(questions[i].id == id){
+      return i;
+    }
+  }
+  return -1;
+}
+
+function getFeedback(id){
+  for(var i = 0; i < feedbacks.length; i++){
+    if(feedbacks[i].id == id){
       return i;
     }
   }
@@ -128,17 +161,28 @@ function updateSelections(){
   }
   for(var i = 0; i < answers.length; i++){
     $('#answers')[0].innerHTML += `<option value="${answers[i].id}">${answers[i].text} (${questions[getQuestion(answers[i].displayQuestion)].text})</option>`;
-    if(getQuestion(answers[i].linksTo) != -1){
-      $("#question" + answers[i].displayQuestion)[0].innerHTML += `<h5>- ${answers[i].text} (links to Question: ${questions[getQuestion(answers[i].linksTo)].text})</h5>`;
+    console.log(answers[i]);
+    if(getFeedback(answers[i].linksTo) != -1){
+      if(getQuestion(feedbacks[getFeedback(answers[i].linksTo)].linksTo) != -1){
+        $("#question" + answers[i].displayQuestion)[0].innerHTML += `<h5>- ${answers[i].text} (links to Question: ${questions[getQuestion(feedbacks[getFeedback(answers[i].linksTo)].linksTo)].text} via feedback)</h5>`;
+      }
+      else{
+        $("#question" + answers[i].displayQuestion)[0].innerHTML += `<h5>- ${answers[i].text} (links to Result: ${results[getResult(feedbacks[getFeedback(answers[i].linksTo)].linksTo)].text} via feedback)</h5>`;
+      }
     }
     else{
-      $("#question" + answers[i].displayQuestion)[0].innerHTML += `<h5>- ${answers[i].text} (links to Result: ${results[getResult(answers[i].linksTo)].text})</h5>`;
+      if(getQuestion(answers[i].linksTo) != -1){
+        $("#question" + answers[i].displayQuestion)[0].innerHTML += `<h5>- ${answers[i].text} (links to Question: ${questions[getQuestion(answers[i].linksTo)].text})</h5>`;
+      }
+      else{
+        $("#question" + answers[i].displayQuestion)[0].innerHTML += `<h5>- ${answers[i].text} (links to Result: ${results[getResult(answers[i].linksTo)].text})</h5>`;
+      }
     }
   }
 }
 
 function exportToJson(){
-  var toOutput = [questions, results, answers];
+  var toOutput = [questions, results, answers, feedbacks];
   var jsonOutput = JSON.stringify(toOutput);
   var data = "text/json;charset=utf-8," + encodeURIComponent(jsonOutput);
   $('#downloadButton').prop("href", `data:${data}`);
@@ -159,6 +203,7 @@ function importFile(){
     questions = result[0];
     results = result[1];
     answers = result[2];
+    feedbacks = result[3];
     updateSelections();
   }
 
@@ -181,6 +226,7 @@ $(document).ready(function(){
       var questionID = addQuestion(text, description);
       updateSelections();
       $('#newQuestionText')[0].value = "";
+      $('#newQuestionDesc')[0].value = "";
     }
     else{
       $('#questionTextVal').removeClass("hidden");
@@ -202,6 +248,7 @@ $(document).ready(function(){
       var resultID = addResult(text, description);
       updateSelections();
       $('#newResultText')[0].value = "";
+      $('#newResultDesc')[0].value = "";
     }
     else{
       $('#resultTextVal').removeClass("hidden");
@@ -212,6 +259,8 @@ $(document).ready(function(){
     var text = $('#newAnswerText')[0].value.trim();
     var display = $('#displayPage')[0].value.trim();
     var linksTo = $('#nextPage')[0].value.trim();
+    var col = $('#newAnswerCol')[0].value.trim();
+    var feedback = $('#newAnswerFeed')[0].value.trim();
     var validated = true;
     if(text == ""){
       $('#answerTextVal').removeClass("hidden");
@@ -237,7 +286,9 @@ $(document).ready(function(){
         });
       }, 500);
       $('#newAnswerText')[0].value = "";
-      var answerID = addAnswer(text, display, linksTo);
+      $('#newAnswerFeed')[0].value = "";
+      console.log(feedback);
+      var answerID = addAnswer(text, display, linksTo, col, feedback);
       updateSelections();
     }
   });

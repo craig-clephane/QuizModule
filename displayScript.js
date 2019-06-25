@@ -1,6 +1,8 @@
 var questions = [];
 var results = [];
 var answers = [];
+var feedbacks = [];
+var responses = [];
 var questionArea;
 var answerArea;
 var activeDisplayID;
@@ -10,6 +12,7 @@ function interpretQuiz(data){
   activeDisplayID = questions[0].id;
   results = data[1];
   answers = data[2];
+  feedbacks = data[3];
   updateDisplay();
 }
 
@@ -53,7 +56,8 @@ $(document).ready(function(){
 function updateDisplay(){
   var activeQuestion = getQuestion(activeDisplayID);
   var activeResult = getResult(activeDisplayID);
-  if(activeQuestion == -1){
+  var activeFeedback = getFeedback(activeDisplayID);
+  if(activeResult != -1){
     //display result
     $('#questionArea').addClass('hidden');
     $('#answersArea').addClass('hidden');
@@ -62,6 +66,10 @@ function updateDisplay(){
     if(results[activeResult].description != "" && results[activeResult].description != undefined){
       resultsArea.innerHTML += `<p class="resultDescription">${results[activeResult].description}</p>`;
     }
+  }
+  else if(activeFeedback != -1){
+    questionArea.innerHTML = `<h3 class="questionDisplay">${answers[getAnswer(feedbacks[getFeedback(activeFeedback)].answer)].text}</h3>`;
+    answersArea = `<button class="btn answerButton" id="${feedbacks[activeFeedback].answer}" onclick="showNext(event)">Next Question</button>`;
   }
   else{
     //display question/answer
@@ -85,6 +93,7 @@ function scrollToMiddle(){
 
 function showNext(event){
   var answer = answers[getAnswer(event.currentTarget.id)];
+  responses.push(answer);
   activeDisplayID = answer.linksTo;
   updateDisplay();
 }
@@ -92,6 +101,15 @@ function showNext(event){
 function getQuestion(id){
   for(var i = 0; i < questions.length; i++){
     if(questions[i].id == id){
+      return i;
+    }
+  }
+  return -1;
+}
+
+function getFeedback(id){
+  for(var i = 0; i < feedbacks.length; i++){
+    if(feedbacks[i].id == id){
       return i;
     }
   }

@@ -9,17 +9,19 @@
 </head>
 <body id="generator">
   <section id="rightSection">
+    <div id="listArea">
+      <h2>Entries</h2>
+      <div id="list">
+      </div>
+    </div>
     <div id="tutorial">
       <h2>Tutorial</h2>
       <p>First, draw up a plan for a quiz, including what questions have what answers, and where each answer will take you. For example, answering "yes" to "are you sure" might take you to another question that says "Are you *really* sure?"</p>
       <p>Then, start by adding each question and result. Questions need answers, but the relationship between them will be created when you make an answer object</p>
       <p>Once the questions and results have been created, you can start adding the answers. "answer to" relates to the question the answer relates to, and "leads to" refers to what will be shown if the answer is selected.</p>
+      <p>"Answer colour" refers to which category the answer falls in. For example, an obviously incorrect answer falls under "red", correct answers fall into "green" and questions that aren't necessarily in either extreme are orange. You can use this to measure the success of the quiz</p>
+      <p>You can also add feedback to questions. These are interim screens that come after an answer, but before the next question. This is where you can provide feedback based on the answer. If you leave this field blank, the answer will link straight to the next question instead.</p>
       <p>When the questions, results and answers have all been added, hit "Generate JSON" at the bottom to receive your quiz file!</p>
-    </div>
-    <div id="listArea">
-      <h2>Entries</h2>
-      <div id="list">
-      </div>
     </div>
   </section>
   <section id="leftSection">
@@ -48,6 +50,13 @@
       <label id="answerToVal" class="warning hidden">'Answer to' cannot be empty!</label>
       <label>Leads to: </label><select name="next" id="nextPage"></select>
       <label id="leadsToVal" class="warning hidden">'Leads to' cannot be empty!</label>
+      <label>Answer feedback: </label><input type="text" id="newAnswerFeed">
+      <label>Answer colour: </label><select type="text" id="newAnswerCol">
+        <option value="none">None</option>
+        <option value="g">Green</option>
+        <option value="o">Orange</option>
+        <option value="r">Red</option>
+      </select>
       <button id="addAnswer" class="btn">Add</button>
     </div>
     <div id="delete">
