@@ -73,23 +73,23 @@ function updateDisplay(){
         resultsArea.innerHTMl += `<p class="questionDescription">${results[activeResult].description}</p>`;
       }
       for(var i = 0; i < responses.length; i++){
-        resultsArea.innerHTML += `<p class="answer" id="answer${responses[i]}">${i}</p>`;
+        resultsArea.innerHTML += `<p class="answerShown" id="answer${responses[i]}">${answers[getAnswer(responses[i])].text} (${questions[getQuestion(answers[getAnswer(responses[i])].displayQuestion)].text})</p>`;
         var colour;
-        switch(getAnswer(responses[i]).col){
+        switch(answers[getAnswer(responses[i])].col){
           case 'r':
             rCount++;
             colour = '#F03030';
           break;
           case 'o':
             oCount++;
-            colour = '#F07530';
+            colour = '#F0A000';
           break;
           case 'g':
             gCount++;
             colour = '#30B030';
           break;
         }
-        $('#answer' + responses[i]).color = colour;
+        $('#answer' + responses[i]).css({"background-color":colour});
       }
     }
     else{
@@ -98,8 +98,7 @@ function updateDisplay(){
         resultsArea.innerHTML += `<p class="resultDescription">${results[activeResult].description}</p>`;
       }
     }
-    resultsArea.innerHTML += `<button class="btn" id="retryButton" onclick="retry()">Retry</button>`;
-    resultsArea.innerHTML += `<button class="btn" id="submitButton" onclick="submit()">Submit</button>`;
+    resultsArea.innerHTML += `<div id="quizButtons"><button class="btn" id="retryButton" onclick="retry()">Retry</button><button class="btn" id="submitButton" onclick="submit()">Submit</button></div>`;
   }
   else if(activeFeedback != -1){
     questionArea.innerHTML = `<h3 class="questionDisplay">${answers[getAnswer(feedbacks[getFeedback(activeFeedback)].answer)].text}</h3>`;
