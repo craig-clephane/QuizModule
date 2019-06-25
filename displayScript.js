@@ -105,7 +105,8 @@ function updateDisplay(){
       <button class="btn" id="submitButton" onclick="submit()">Submit</button></div>`;
     }
     else{
-      resultsArea.innerHTML += `<div id="quizButtons"><button class="btn" id="retryButton" onclick="retry()">Retry</button><button class="btn" id="submitButton"><a href="${endURL}?Green=${gCount}&Orange=${oCount}&Red=${rCount}">Submit</a></button></div>`;
+      resultsArea.innerHTML += `<div id="quizButtons"><button class="btn" id="retryButton" onclick="retry()">Retry</button>
+      <button class="btn" id="submitButton" onclick="window.top.location=${endURL}?Green=${gCount}&Orange=${oCount}&Red=${rCount}">Submit</button></div>`;
     }
   }
   else if(activeFeedback != -1){
