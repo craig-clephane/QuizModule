@@ -74,7 +74,7 @@ function updateDisplay(){
       }
       for(var i = 0; i < responses.length; i++){
         resultsArea.innerHTML += `<p class="answerShown" id="answer${responses[i]}">${answers[getAnswer(responses[i])].text} (${questions[getQuestion(answers[getAnswer(responses[i])].displayQuestion)].text})</p>`;
-        var colour;
+        var colour = "grey";
         switch(answers[getAnswer(responses[i])].col){
           case 'r':
             rCount++;
@@ -101,7 +101,7 @@ function updateDisplay(){
     resultsArea.innerHTML += `<div id="quizButtons"><button class="btn" id="retryButton" onclick="retry()">Retry</button><button class="btn" id="submitButton" onclick="submit()">Submit</button></div>`;
   }
   else if(activeFeedback != -1){
-    questionArea.innerHTML = `<h3 class="questionDisplay">${answers[getAnswer(feedbacks[activeFeedback].answer)].text}</h3>`;
+    questionArea.innerHTML = `<h3 class="questionDisplay">${answers[getAnswer(feedbacks[activeFeedback].answer)].text}</h3><p class="questionDescription">${feedbacks[activeFeedback].text}</p>`;
     answersArea.innerHTML = `<button class="btn answerButton" id="${feedbacks[activeFeedback].id}" onclick="showNext(event)">Next Question</button>`;
   }
   else{
