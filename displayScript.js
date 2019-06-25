@@ -100,14 +100,7 @@ function updateDisplay(){
         resultsArea.innerHTML += `<p class="resultDescription">${results[activeResult].description}</p>`;
       }
     }
-    if(endURL == undefined){
-      resultsArea.innerHTML += `<div id="quizButtons"><button class="btn" id="retryButton" onclick="retry()">Retry</button>
-      <button class="btn" id="submitButton" onclick="submit()">Submit</button></div>`;
-    }
-    else{
-      resultsArea.innerHTML += `<div id="quizButtons"><button class="btn" id="retryButton" onclick="retry()">Retry</button>
-      <button class="btn" id="submitButton" onclick="window.top.location.href=${endURL}?Green=${gCount}&Orange=${oCount}&Red=${rCount}">Submit</button></div>`;
-    }
+    resultsArea.innerHTML += `<div id="quizButtons"><button class="btn" id="retryButton" onclick="retry()">Retry</button><button class="btn" id="submitButton" onclick="submit()">Submit</button></div>`;
   }
   else if(activeFeedback != -1){
     questionArea.innerHTML = `<h3 class="questionDisplay">${answers[getAnswer(feedbacks[activeFeedback].answer)].text}</h3><p class="questionDescription">${feedbacks[activeFeedback].text}</p>`;
@@ -146,10 +139,10 @@ function submit(){
   }
   else{
     if(inIframe()){
-      window.top.location.href = endURL + `?Green=${gCount}&Orange=${oCount}&Red=${rCount}`;
+      window.top.location = endURL + `?Green=${gCount}&Orange=${oCount}&Red=${rCount}`;
     }
     else{
-      window.location.href = endURL + `?Green=${gCount}&Orange=${oCount}&Red=${rCount}`;
+      window.location = endURL + `?Green=${gCount}&Orange=${oCount}&Red=${rCount}`;
     }
   }
 }
